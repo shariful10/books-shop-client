@@ -8,7 +8,8 @@ import Register from "@/pages/RegisterPage/Register";
 
 import Dashboard from "@/components/layout/dashboard/Dashboard";
 import OrderManagement from "@/pages/Dashboard/OrderManagement";
-import ProductManagement from "@/pages/Dashboard/ProductManagement";
+import AddProduct from "@/pages/Dashboard/ProductManagement/AddProduct";
+import ProductManagement from "@/pages/Dashboard/ProductManagement/ProductManagement";
 import ProfileManagement from "@/pages/Dashboard/ProfileManagement";
 import UserManagement from "@/pages/Dashboard/UserManagement";
 import { createBrowserRouter } from "react-router-dom";
@@ -87,6 +88,10 @@ const router = createBrowserRouter([
 			{
 				path: "product-management",
 				element: <ProductManagement />,
+			},
+			{
+				path: "add-product",
+				element: <AddProduct />,
 			},
 			{
 				path: "order-management",

@@ -21,7 +21,6 @@ import { Link } from "react-router-dom";
 export const NavMain = ({ items }: { items: TNavMainProps }) => {
 	return (
 		<SidebarGroup>
-			{/* <SidebarGroupLabel>Menu</SidebarGroupLabel> */}
 			<SidebarMenu>
 				{items.map((item) => (
 					<Collapsible

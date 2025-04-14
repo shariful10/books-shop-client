@@ -8,11 +8,11 @@
 }
 
 .spinner > div {
-	background-color: hsla(262.1, 83.3%, 57.8%, 0.2);
+	background-color: hsla(25, 89%, 55%, 0.502);
 	height: 100%;
 	position: absolute;
 	width: 100%;
-	border: 2px solid hsl(262.1, 83.3%, 57.8%);
+	border: 2px solid hsl(25, 89%, 55%);
 }
 
 .spinner div:nth-of-type(1) {

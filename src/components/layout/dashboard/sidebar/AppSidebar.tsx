@@ -42,15 +42,12 @@ export const AppSidebar = ({ ...props }: ComponentProps<typeof Sidebar>) => {
 			<SidebarHeader>
 				<SidebarMenu>
 					<SidebarMenuItem>
-						<SidebarMenuButton size="lg" asChild>
-							<div>
-								<div className="flex items-end justify-center">
-									<Logo />
-								</div>
-								<div className="grid flex-1 text-left text-sm leading-tight">
-									<h2 className="text-xl font-bold">NextMart</h2>
-								</div>
-							</div>
+						<SidebarMenuButton
+							size="default"
+							asChild
+							className="h-full hover:bg-transparent"
+						>
+							<Logo className="w-auto h-14" />
 						</SidebarMenuButton>
 					</SidebarMenuItem>
 				</SidebarMenu>

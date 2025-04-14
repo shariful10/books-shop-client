@@ -2,7 +2,7 @@ import Container from "@/components/module/Container";
 import { Button } from "@/components/ui/button";
 import { selectCurrentUser } from "@/redux/features/auth/authSlice";
 import { useAppSelector } from "@/redux/hook";
-import { Link, useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import Dropdown from "./Dropdown";
 import Logo from "./Logo";
 import MobileNavbar from "./MobileNavbar";
@@ -13,13 +13,34 @@ const Navbar = () => {
 	const user = useAppSelector(selectCurrentUser);
 
 	return (
-		<div className="relative w-full border-b-2 border-b-primary">
+		<div className="w-full border-b-2 border-b-primary sticky top-0 z-50 bg-background">
 			<Container className="flex justify-between items-center py-3 text-2xl font-bold relative">
-				<Logo />
+				<Logo className="w-auto h-10" />
 				<div className="hidden md:block space-x-4 text-base text-[#222222] font-medium">
-					<Link to="/">Home</Link>
-					<Link to="/about">About</Link>
-					<Link to="/cart">Cart</Link>
+					<NavLink
+						to="/"
+						className={({ isActive }) =>
+							isActive ? "text-primary font-bold" : "hover:text-primary"
+						}
+					>
+						Home
+					</NavLink>
+					<NavLink
+						to="/about"
+						className={({ isActive }) =>
+							isActive ? "text-primary font-bold" : "hover:text-primary"
+						}
+					>
+						About
+					</NavLink>
+					<NavLink
+						to="/products"
+						className={({ isActive }) =>
+							isActive ? "text-primary font-bold" : "hover:text-primary"
+						}
+					>
+						All Products
+					</NavLink>
 				</div>
 				<div className="flex items-center space-x-4">
 					{user ? (

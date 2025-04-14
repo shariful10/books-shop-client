@@ -56,7 +56,7 @@ const Dropdown = () => {
 					/>
 				</Avatar>
 			</DropdownMenuTrigger>
-			<DropdownMenuContent className="absolute -left-28 md:-left-5">
+			<DropdownMenuContent className="absolute -left-28 md:-left-5 md:w-56">
 				<DropdownMenuLabel>
 					<div>
 						<h4>Name: {user!.name}</h4>
