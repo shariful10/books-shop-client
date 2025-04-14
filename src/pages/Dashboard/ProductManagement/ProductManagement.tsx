@@ -3,18 +3,23 @@ import BSTable from "@/components/module/table/BSTable";
 import Spinner from "@/components/spinner/Spinner";
 import { currencyFormatter } from "@/lib/currencyFormatter";
 import { cn } from "@/lib/utils";
-import { useGetAllBooksQuery } from "@/redux/features/bookManagement/bookManagement";
+import {
+	useDeleteProductMutation,
+	useGetAllBooksQuery,
+} from "@/redux/features/bookManagement/bookManagement";
 import { TUser } from "@/types";
 import { TBook } from "@/types/book";
 import { ColumnDef } from "@tanstack/react-table";
 import { Trash } from "lucide-react";
 import { useState } from "react";
+import { toast } from "sonner";
 
 const ProductManagement = () => {
 	const [selectedId, setSelectedId] = useState<string | null>(null);
 	const [isModalOpen, setModalOpen] = useState<boolean>(false);
 
 	const { data: books, isFetching } = useGetAllBooksQuery(undefined);
+	const [deleteProduct, { isLoading }] = useDeleteProductMutation();
 
 	const book = books?.data.find((user: TUser) => user._id === selectedId);
 
@@ -23,20 +28,18 @@ const ProductManagement = () => {
 		setSelectedId(userId);
 	};
 
-	const isLoading = false;
-
 	const handleDeleteConfirm = async () => {
 		console.log(selectedId);
 		try {
-			// if (selectedId) {
-			// 	const res = await deleteUser(selectedId).unwrap();
-			// 	if (res.success) {
-			// 		toast.success(res.message);
-			// 		setModalOpen(false);
-			// 	} else {
-			// 		toast.error(res.message);
-			// 	}
-			// }
+			if (selectedId) {
+				const res = await deleteProduct(selectedId).unwrap();
+				if (res.success) {
+					toast.success(res.message);
+					setModalOpen(false);
+				} else {
+					toast.error(res.message);
+				}
+			}
 		} catch (err: any) {
 			console.error(err?.message);
 		}
@@ -56,10 +59,10 @@ const ProductManagement = () => {
 						src={
 							row.original.thumbnail
 								? row.original.thumbnail
-								: "https://mgcfeni.edu.bd/midea/featuredimage/featuredimage2019-03-04-13-47-19_5c7d1e5732a77.jpg"
+								: "https://developers.elementor.com/docs/assets/img/elementor-placeholder-image.png"
 						}
 						alt={row.original.title}
-						className="size-8 rounded-full border border-primary"
+						className="size-8 rounded-full"
 					/>
 					<span className="truncate">{row.original.title}</span>
 				</div>

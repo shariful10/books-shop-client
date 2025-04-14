@@ -9,14 +9,15 @@ const bookManagementApi = baseApi.injectEndpoints({
 			}),
 			providesTags: ["Books"],
 		}),
-		deleteUser: builder.mutation({
-			query: (userId) => ({
-				url: `/users/${userId}`,
+		deleteProduct: builder.mutation({
+			query: (productId) => ({
+				url: `/books/${productId}`,
 				method: "DELETE",
 			}),
-			invalidatesTags: ["Users"],
+			invalidatesTags: ["Books"],
 		}),
 	}),
 });
 
-export const { useGetAllBooksQuery, useDeleteUserMutation } = bookManagementApi;
+export const { useGetAllBooksQuery, useDeleteProductMutation } =
+	bookManagementApi;
