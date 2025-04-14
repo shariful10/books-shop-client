@@ -102,6 +102,7 @@ const UserManagement = () => {
 			{/* <TablePagination totalPages={meta?.totalPage} /> */}
 			<DeleteConfirmationModal
 				name={user?.name}
+				itemName="User"
 				isOpen={isModalOpen}
 				isLoading={isLoading}
 				onOpenChange={setModalOpen}

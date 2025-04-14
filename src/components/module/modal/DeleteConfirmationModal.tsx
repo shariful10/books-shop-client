@@ -9,6 +9,7 @@ import {
 } from "@/components/ui/dialog";
 
 type TDeleteModalProps = {
+	itemName: string;
 	name: string | null;
 	isOpen: boolean;
 	isLoading?: boolean;
@@ -17,6 +18,7 @@ type TDeleteModalProps = {
 };
 
 const DeleteConfirmationModal = ({
+	itemName,
 	name,
 	isOpen,
 	onConfirm,
@@ -27,7 +29,7 @@ const DeleteConfirmationModal = ({
 		<Dialog open={isOpen} onOpenChange={onOpenChange}>
 			<DialogContent>
 				<DialogHeader>
-					<DialogTitle>Delete Item</DialogTitle>
+					<DialogTitle>Delete {itemName}</DialogTitle>
 					<DialogDescription>
 						Are you sure you want to delete{" "}
 						<span className="font-semibold text-red-500">{name}</span>? This
@@ -35,7 +37,11 @@ const DeleteConfirmationModal = ({
 					</DialogDescription>
 				</DialogHeader>
 				<DialogFooter>
-					<Button variant="outline" onClick={() => onOpenChange(false)}>
+					<Button
+						variant="outline"
+						onClick={() => onOpenChange(false)}
+						className="cursor-pointer"
+					>
 						Cancel
 					</Button>
 					<Button
@@ -44,6 +50,7 @@ const DeleteConfirmationModal = ({
 							onConfirm();
 							onOpenChange(false);
 						}}
+						className="cursor-pointer"
 					>
 						{isLoading ? "Deleting..." : "Confirm"}
 					</Button>
