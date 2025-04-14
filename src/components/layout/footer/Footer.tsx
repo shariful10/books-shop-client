@@ -16,7 +16,7 @@ const Footer = () => {
 						</p>
 					</div>
 					<div className="space-y-4 mb-4 md:mb-0">
-						<h4 className="text-xl font-semibold">About Us</h4>
+						<h4 className="text-xl font-semibold">Quick Links</h4>
 						<div className="flex flex-col gap-2">
 							<Link to="/" className="text-white">
 								Home

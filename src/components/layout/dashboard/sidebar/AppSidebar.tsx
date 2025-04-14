@@ -10,129 +10,18 @@ import {
 } from "@/components/ui/sidebar";
 import { userRole } from "@/constants";
 import { adminData, userData } from "@/data/sidebar";
+import { selectCurrentUser } from "@/redux/features/auth/authSlice";
+import { useAppSelector } from "@/redux/hook";
 import { ComponentProps } from "react";
 import { Link } from "react-router-dom";
 import Logo from "../../navbar/Logo";
 import { NavMain } from "./NavMain";
 import { NavUser } from "./NavUser";
 
-// This is sample data.
-// const adminData = {
-// 	navMain: [
-// 		{
-// 			title: "Dashboard",
-// 			url: "/user/dashboard",
-// 			icon: SquareTerminal,
-// 			isActive: true,
-// 		},
-// 		{
-// 			title: "wehfhui champion",
-// 			url: "#",
-// 			icon: Bot,
-// 			items: [
-// 				{
-// 					title: "Manage Products",
-// 					url: "/user/shop/products",
-// 				},
-// 				{
-// 					title: "Manage Categories",
-// 					url: "/user/shop/category",
-// 				},
-// 				{
-// 					title: "Manage Brands",
-// 					url: "/user/shop/brand",
-// 				},
-// 				{
-// 					title: "Manage Coupon",
-// 					url: "/user/shop/coupon",
-// 				},
-// 			],
-// 		},
-// 		// {
-// 		// 	title: "Settings",
-// 		// 	url: "#",
-// 		// 	icon: Settings,
-// 		// 	items: [
-// 		// 		{
-// 		// 			title: "Profile",
-// 		// 			url: "/profile",
-// 		// 		},
-// 		// 	],
-// 		// },
-// 	],
-// 	navSecondary: [
-// 		{
-// 			title: "Support",
-// 			url: "#",
-// 			icon: LifeBuoy,
-// 		},
-// 		{
-// 			title: "Feedback",
-// 			url: "#",
-// 			icon: Send,
-// 		},
-// 	],
-// };
-
-// const userData = {
-// 	navMain: [
-// 		{
-// 			title: "Dashboard",
-// 			url: "/user/dashboard",
-// 			icon: SquareTerminal,
-// 			isActive: true,
-// 		},
-// 		{
-// 			title: "Shop",
-// 			url: "#",
-// 			icon: Bot,
-// 			items: [
-// 				{
-// 					title: "Manage Products",
-// 					url: "/user/shop/products",
-// 				},
-// 				{
-// 					title: "Manage Categories",
-// 					url: "/user/shop/category",
-// 				},
-// 				{
-// 					title: "Manage Brands",
-// 					url: "/user/shop/brand",
-// 				},
-// 				{
-// 					title: "Manage Coupon",
-// 					url: "/user/shop/coupon",
-// 				},
-// 			],
-// 		},
-// 		{
-// 			title: "Settings",
-// 			url: "#",
-// 			icon: Settings,
-// 			items: [
-// 				{
-// 					title: "Profile",
-// 					url: "/profile",
-// 				},
-// 			],
-// 		},
-// 	],
-// 	navSecondary: [
-// 		{
-// 			title: "Support",
-// 			url: "#",
-// 			icon: LifeBuoy,
-// 		},
-// 		{
-// 			title: "Feedback",
-// 			url: "#",
-// 			icon: Send,
-// 		},
-// 	],
-// };
-
 export const AppSidebar = ({ ...props }: ComponentProps<typeof Sidebar>) => {
-	const role = "admin";
+	const user = useAppSelector(selectCurrentUser);
+	const role = user?.role ?? userRole.USER; // Default to USER if role is not defined
+
 	let data;
 
 	switch (role) {
@@ -148,6 +37,7 @@ export const AppSidebar = ({ ...props }: ComponentProps<typeof Sidebar>) => {
 		default:
 			break;
 	}
+
 	return (
 		<Sidebar collapsible="icon" {...props}>
 			<SidebarHeader>

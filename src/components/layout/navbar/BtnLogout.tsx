@@ -21,7 +21,7 @@ const BtnLogout: React.FC<TBtnLogoutProps> = ({ className }) => {
 	return (
 		<Button
 			className={cn(
-				"hidden md:block text-white hover:text-primary bg-primary hover:bg-transparent border border-primaryColor px-4 py-2 rounded-md duration-500",
+				"hidden md:block text-white hover:text-primary hover:bg-transparent border border-primary px-4 py-2 rounded-md duration-500",
 				className
 			)}
 			onClick={handleLogout}

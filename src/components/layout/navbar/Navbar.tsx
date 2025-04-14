@@ -1,23 +1,16 @@
 import Container from "@/components/module/Container";
 import { Button } from "@/components/ui/button";
-import {
-	selectCurrentUser,
-	useCurrentToken,
-} from "@/redux/features/auth/authSlice";
-import { useGetMeQuery } from "@/redux/features/userManagement/userManagementApi";
+import { selectCurrentUser } from "@/redux/features/auth/authSlice";
 import { useAppSelector } from "@/redux/hook";
 import { Link, useNavigate } from "react-router-dom";
-import BtnLogout from "./BtnLogout";
 import Dropdown from "./Dropdown";
 import Logo from "./Logo";
 import MobileNavbar from "./MobileNavbar";
 
 const Navbar = () => {
 	const navigate = useNavigate();
-	const token = useAppSelector(useCurrentToken);
 
 	const user = useAppSelector(selectCurrentUser);
-	const { data: me } = useGetMeQuery(user?.email);
 
 	return (
 		<div className="relative w-full border-b-2 border-b-primary">
@@ -29,15 +22,24 @@ const Navbar = () => {
 					<Link to="/cart">Cart</Link>
 				</div>
 				<div className="flex items-center space-x-4">
-					{token ? (
+					{user ? (
 						<div className="flex items-center space-x-4">
-							{me && <Dropdown />}
-							<BtnLogout />
+							{user && <Dropdown />}
 						</div>
 					) : (
 						<div className="space-x-4 hidden md:block">
-							<Button onClick={() => navigate("/login")}>Login</Button>
-							<Button onClick={() => navigate("/register")}>Sign Up</Button>
+							<Button
+								onClick={() => navigate("/login")}
+								className="cursor-pointer"
+							>
+								Login
+							</Button>
+							<Button
+								onClick={() => navigate("/register")}
+								className="cursor-pointer"
+							>
+								Sign Up
+							</Button>
 						</div>
 					)}
 					<div className="flex items-center space-x-3 justify-end">

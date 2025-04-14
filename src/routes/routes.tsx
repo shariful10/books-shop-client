@@ -11,6 +11,8 @@ import OrderManagement from "@/pages/Dashboard/OrderManagement";
 import ProductManagement from "@/pages/Dashboard/ProductManagement";
 import ProfileManagement from "@/pages/Dashboard/ProfileManagement";
 import { createBrowserRouter } from "react-router-dom";
+import AdminProtectedRoute from "./AdminProtectedRoute";
+import UserProtectedRoute from "./UserProtectedRoute";
 
 const router = createBrowserRouter([
 	{
@@ -45,7 +47,11 @@ const router = createBrowserRouter([
 	},
 	{
 		path: "/user/dashboard",
-		element: <Dashboard />,
+		element: (
+			<UserProtectedRoute>
+				<Dashboard />
+			</UserProtectedRoute>
+		),
 		children: [
 			{
 				path: "profile-management",
@@ -63,7 +69,11 @@ const router = createBrowserRouter([
 	},
 	{
 		path: "/admin/dashboard",
-		element: <Dashboard />,
+		element: (
+			<AdminProtectedRoute>
+				<Dashboard />
+			</AdminProtectedRoute>
+		),
 		children: [
 			{
 				path: "profile-management",

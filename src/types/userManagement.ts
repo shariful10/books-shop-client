@@ -14,6 +14,5 @@ export type TUser = {
 export type TUserResponse = {
 	success: boolean;
 	message: string;
-	data: TUser;
-	accessToken: TAccessToken;
+	data: TAccessToken;
 };

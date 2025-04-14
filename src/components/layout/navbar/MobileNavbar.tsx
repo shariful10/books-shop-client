@@ -6,14 +6,14 @@ import {
 	SheetTitle,
 	SheetTrigger,
 } from "@/components/ui/sheet";
+import { selectCurrentUser } from "@/redux/features/auth/authSlice";
+import { useAppSelector } from "@/redux/hook";
 import { Menu } from "lucide-react";
-import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 
-const MobileNavbar: React.FC = () => {
+const MobileNavbar = () => {
 	const navigate = useNavigate();
-
-	const user = false;
+	const user = useAppSelector(selectCurrentUser);
 
 	return (
 		<Sheet>
@@ -34,9 +34,7 @@ const MobileNavbar: React.FC = () => {
 					</div>
 				</div>
 				<div className="md:hidden p-4">
-					{user ? (
-						<Button>Logout</Button>
-					) : (
+					{!user && (
 						<div className="space-y-4 flex flex-col">
 							<Button onClick={() => navigate("/login")}>Login</Button>
 							<Button onClick={() => navigate("/register")}>Sign Up</Button>

@@ -9,6 +9,11 @@ import {
 	FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { verifyToken } from "@/lib/verifyToken";
+import { useRegisterMutation } from "@/redux/features/auth/authApi";
+import { setUser } from "@/redux/features/auth/authSlice";
+import { useAppDispatch } from "@/redux/hook";
+import { TAccessToken, TResponse, TUser, TUserResponse } from "@/types";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
 	FieldValues,
@@ -16,28 +21,51 @@ import {
 	SubmitHandler,
 	useForm,
 } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { toast } from "sonner";
 import { registrationSchema } from "./registerValidation";
 
 const Register = () => {
 	const form = useForm({
 		resolver: zodResolver(registrationSchema),
 	});
-	// const [registerUser, { isLoading }] = useRegisterMutation();
+
+	const navigate = useNavigate();
+	const dispatch = useAppDispatch();
+	const [registerUser, { isLoading }] = useRegisterMutation();
 
 	const password = form.watch("password");
 	const passwordConfirm = form.watch("passwordConfirm");
 
 	const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-		console.log(data);
+		const modifiedData = {
+			name: data.name,
+			email: data.email,
+			profileImg: data.profileImg,
+			password: data.password,
+		};
+
 		try {
-			// const res = await registerUser(data);
-			// console.log(res);
-			// if (res?.success) {
-			// 	toast.success(res?.message);
-			// } else {
-			// 	toast.error(res?.message);
-			// }
+			const res = (await registerUser(modifiedData)) as TResponse<
+				TUserResponse & TAccessToken
+			>;
+
+			const user = verifyToken(res.data!.data.accessToken as string);
+
+			dispatch(
+				setUser({
+					user: user as TUser,
+					token: res.data!.data.accessToken as string,
+				})
+			);
+
+			if (res?.data?.success) {
+				toast.success(res?.data?.message);
+				form.reset();
+				navigate("/");
+			} else {
+				toast.error(res?.data?.message);
+			}
 		} catch (err: any) {
 			console.log(err);
 		}
@@ -166,7 +194,7 @@ const Register = () => {
 							disabled={!!passwordConfirm && password !== passwordConfirm}
 							className="mt-5 cursor-pointer w-full"
 						>
-							{/* {isLoading ? "Registering..." : "Register"} */}Register
+							{isLoading ? "Registering..." : "Register"}
 						</Button>
 					</form>
 				</FormProvider>

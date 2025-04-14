@@ -35,10 +35,6 @@ const Login = () => {
 		try {
 			const res = await login(data).unwrap();
 
-			if (res.error) {
-				toast.error(res?.error?.data.message);
-			}
-
 			const user = verifyToken(res?.data?.accessToken as string) as TLoggedUser;
 
 			dispatch(

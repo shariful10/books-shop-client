@@ -14,16 +14,20 @@ import {
 	SidebarMenuItem,
 	useSidebar,
 } from "@/components/ui/sidebar";
+import { logOut, selectCurrentUser } from "@/redux/features/auth/authSlice";
+import { useAppDispatch, useAppSelector } from "@/redux/hook";
+import { useNavigate } from "react-router-dom";
 
 export const NavUser = () => {
+	const navigate = useNavigate();
+	const dispatch = useAppDispatch();
+
 	const { isMobile } = useSidebar();
+	const user = useAppSelector(selectCurrentUser);
 
 	const handleLogout = () => {
-		// logout();
-		// setIsLoading(true);
-		// if (protectedRoutes.some((route) => pathname.match(route))) {
-		// 	router.push("/");
-		// }
+		dispatch(logOut());
+		navigate("/");
 	};
 
 	return (
@@ -37,16 +41,20 @@ export const NavUser = () => {
 						>
 							<Avatar className="h-8 w-8 rounded-full">
 								<AvatarImage
-									src="https://templates.joomla-monster.com/joomla30/jm-news-portal/components/com_djclassifieds/assets/images/default_profile.png"
+									src={
+										user?.profileImg
+											? user?.profileImg
+											: "https://mgcfeni.edu.bd/midea/featuredimage/featuredimage2019-03-04-13-47-19_5c7d1e5732a77.jpg"
+									}
 									alt={"user?.name"}
 								/>
 								<AvatarFallback className="rounded-lg">
-									{"user?.role"}
+									{user?.role}
 								</AvatarFallback>
 							</Avatar>
 							<div className="grid flex-1 text-left text-sm leading-tight">
-								<span className="truncate font-semibold">{"user?.name"}</span>
-								<span className="truncate text-xs">{"user?.email"}</span>
+								<span className="truncate font-semibold">{user?.name}</span>
+								<span className="truncate text-xs">{user?.email}</span>
 							</div>
 							<ChevronsUpDown className="ml-auto size-4" />
 						</SidebarMenuButton>
@@ -61,16 +69,20 @@ export const NavUser = () => {
 							<div className="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
 								<Avatar className="h-8 w-8 rounded-full">
 									<AvatarImage
-										src="https://templates.joomla-monster.com/joomla30/jm-news-portal/components/com_djclassifieds/assets/images/default_profile.png"
-										alt={"user?.name"}
+										src={
+											user?.profileImg
+												? user?.profileImg
+												: "https://mgcfeni.edu.bd/midea/featuredimage/featuredimage2019-03-04-13-47-19_5c7d1e5732a77.jpg"
+										}
+										alt={user?.name}
 									/>
 									<AvatarFallback className="rounded-lg">
-										{"user?.role"}
+										{user?.role}
 									</AvatarFallback>
 								</Avatar>
 								<div className="grid flex-1 text-left text-sm leading-tight">
-									<span className="truncate font-semibold">{"user?.name"}</span>
-									<span className="truncate text-xs">{"user?.email"}</span>
+									<span className="truncate font-semibold">{user?.name}</span>
+									<span className="truncate text-xs">{user?.email}</span>
 								</div>
 							</div>
 						</DropdownMenuLabel>
