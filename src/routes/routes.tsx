@@ -10,6 +10,7 @@ import Dashboard from "@/components/layout/dashboard/Dashboard";
 import OrderManagement from "@/pages/Dashboard/OrderManagement";
 import ProductManagement from "@/pages/Dashboard/ProductManagement";
 import ProfileManagement from "@/pages/Dashboard/ProfileManagement";
+import UserManagement from "@/pages/Dashboard/UserManagement";
 import { createBrowserRouter } from "react-router-dom";
 import AdminProtectedRoute from "./AdminProtectedRoute";
 import UserProtectedRoute from "./UserProtectedRoute";
@@ -78,6 +79,10 @@ const router = createBrowserRouter([
 			{
 				path: "profile-management",
 				element: <ProfileManagement />,
+			},
+			{
+				path: "user-management",
+				element: <UserManagement />,
 			},
 			{
 				path: "product-management",

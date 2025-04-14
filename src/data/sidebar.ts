@@ -1,4 +1,4 @@
-import { Bot, Package, SquareTerminal, User } from "lucide-react";
+import { Bot, Package, SquareTerminal, User, Users } from "lucide-react";
 
 export const adminData = {
 	navMain: [
@@ -12,6 +12,11 @@ export const adminData = {
 			title: "Profile Management",
 			url: "/admin/dashboard/profile-management",
 			icon: User,
+		},
+		{
+			title: "User Management",
+			url: "/admin/dashboard/user-management",
+			icon: Users,
 		},
 		{
 			title: "Product Management",

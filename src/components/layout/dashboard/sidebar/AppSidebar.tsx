@@ -13,14 +13,13 @@ import { adminData, userData } from "@/data/sidebar";
 import { selectCurrentUser } from "@/redux/features/auth/authSlice";
 import { useAppSelector } from "@/redux/hook";
 import { ComponentProps } from "react";
-import { Link } from "react-router-dom";
 import Logo from "../../navbar/Logo";
 import { NavMain } from "./NavMain";
 import { NavUser } from "./NavUser";
 
 export const AppSidebar = ({ ...props }: ComponentProps<typeof Sidebar>) => {
 	const user = useAppSelector(selectCurrentUser);
-	const role = user?.role ?? userRole.USER; // Default to USER if role is not defined
+	const role = user?.role ?? userRole.USER;
 
 	let data;
 
@@ -44,14 +43,14 @@ export const AppSidebar = ({ ...props }: ComponentProps<typeof Sidebar>) => {
 				<SidebarMenu>
 					<SidebarMenuItem>
 						<SidebarMenuButton size="lg" asChild>
-							<Link to="/">
+							<div>
 								<div className="flex items-end justify-center">
 									<Logo />
 								</div>
 								<div className="grid flex-1 text-left text-sm leading-tight">
 									<h2 className="text-xl font-bold">NextMart</h2>
 								</div>
-							</Link>
+							</div>
 						</SidebarMenuButton>
 					</SidebarMenuItem>
 				</SidebarMenu>

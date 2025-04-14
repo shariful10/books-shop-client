@@ -3,10 +3,10 @@ export const adminPaths = [
 		title: "Profile",
 		url: "admin/dashboard/profile-management",
 	},
-	// {
-	// 	title: "User Management",
-	// 	url: "/dashboard/user-management",
-	// },
+	{
+		title: "User Management",
+		url: "admin/dashboard/user-management",
+	},
 	{
 		title: "Product Management",
 		url: "admin/dashboard/product-management",

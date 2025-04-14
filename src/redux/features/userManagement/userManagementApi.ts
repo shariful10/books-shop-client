@@ -8,6 +8,7 @@ const userManagementApi = baseApi.injectEndpoints({
 				url: "/users",
 				method: "GET",
 			}),
+			providesTags: ["Users"],
 		}),
 		getMe: builder.query({
 			query: (email) => ({
@@ -20,7 +21,15 @@ const userManagementApi = baseApi.injectEndpoints({
 				};
 			},
 		}),
+		deleteUser: builder.mutation({
+			query: (userId) => ({
+				url: `/users/${userId}`,
+				method: "DELETE",
+			}),
+			invalidatesTags: ["Users"],
+		}),
 	}),
 });
 
-export const { useGetAllUsersQuery, useGetMeQuery } = userManagementApi;
+export const { useGetAllUsersQuery, useGetMeQuery, useDeleteUserMutation } =
+	userManagementApi;

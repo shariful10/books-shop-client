@@ -19,9 +19,11 @@ const Dropdown = () => {
 	const dispatch = useAppDispatch();
 	const user = useAppSelector(selectCurrentUser);
 
+	const role = user?.role ?? userRole.USER;
+
 	let items;
 
-	switch (user?.role) {
+	switch (role) {
 		case userRole.USER:
 			items = userPaths;
 			break;
