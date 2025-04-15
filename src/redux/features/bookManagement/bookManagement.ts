@@ -22,6 +22,7 @@ const bookManagementApi = baseApi.injectEndpoints({
 				method: "POST",
 				body: data,
 			}),
+			invalidatesTags: ["Books"],
 		}),
 	}),
 });

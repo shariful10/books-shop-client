@@ -1,6 +1,7 @@
 import DeleteConfirmationModal from "@/components/module/modal/DeleteConfirmationModal";
 import BSTable from "@/components/module/table/BSTable";
 import Spinner from "@/components/spinner/Spinner";
+import { Button } from "@/components/ui/button";
 import { currencyFormatter } from "@/lib/currencyFormatter";
 import { cn } from "@/lib/utils";
 import {
@@ -10,8 +11,9 @@ import {
 import { TUser } from "@/types";
 import { TBook } from "@/types/book";
 import { ColumnDef } from "@tanstack/react-table";
-import { Trash } from "lucide-react";
+import { Plus, Trash } from "lucide-react";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { toast } from "sonner";
 
 const ProductManagement = () => {
@@ -62,7 +64,7 @@ const ProductManagement = () => {
 								: "https://developers.elementor.com/docs/assets/img/elementor-placeholder-image.png"
 						}
 						alt={row.original.title}
-						className="size-8 rounded-full"
+						className="size-8 rounded-md"
 					/>
 					<span className="truncate">{row.original.title}</span>
 				</div>
@@ -125,6 +127,12 @@ const ProductManagement = () => {
 		<div>
 			<div className="flex items-center justify-between">
 				<h1 className="text-xl font-bold">Manage Products</h1>
+				<Link to="/admin/dashboard/add-product">
+					<Button className="cursor-pointer">
+						<span>Add Product</span>
+						<Plus />
+					</Button>
+				</Link>
 			</div>
 			<BSTable columns={columns} data={books?.data || []} />
 			{/* <TablePagination totalPages={meta?.totalPage} /> */}

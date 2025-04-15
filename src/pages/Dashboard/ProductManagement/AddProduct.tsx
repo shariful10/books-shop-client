@@ -219,7 +219,11 @@ const AddProduct = () => {
 								)}
 							/>
 						</div>
-						<Button type="submit" className="mt-5 w-full" disabled={isLoading}>
+						<Button
+							type="submit"
+							className="mt-5 w-full cursor-pointer"
+							disabled={isLoading}
+						>
 							{isLoading ? "Adding Product....." : "Add Product"}
 						</Button>
 					</form>
