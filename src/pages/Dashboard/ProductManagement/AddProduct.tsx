@@ -32,7 +32,6 @@ const AddProduct = () => {
 	const { data: me, isFetching } = useGetMeQuery(user?.email);
 
 	const [addBook, { isLoading }] = useAddBookMutation();
-
 	const author = me?.data;
 
 	const form = useForm({
