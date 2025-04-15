@@ -71,7 +71,7 @@ const ProductManagement = () => {
 		{
 			accessorKey: "author",
 			header: "Author",
-			cell: ({ row }) => <span>{row.original.author}</span>,
+			cell: ({ row }) => <span>{row.original.author?.name}</span>,
 		},
 		{
 			accessorKey: "category",

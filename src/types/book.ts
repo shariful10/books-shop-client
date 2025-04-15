@@ -1,7 +1,9 @@
+import { TUser } from "./userManagement";
+
 export type TBook = {
 	_id: string;
 	title: string;
-	author: string;
+	author: TUser;
 	price: number;
 	category: string;
 	description: string;

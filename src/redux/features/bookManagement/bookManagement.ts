@@ -16,8 +16,18 @@ const bookManagementApi = baseApi.injectEndpoints({
 			}),
 			invalidatesTags: ["Books"],
 		}),
+		addBook: builder.mutation({
+			query: (data) => ({
+				url: "/books",
+				method: "POST",
+				body: data,
+			}),
+		}),
 	}),
 });
 
-export const { useGetAllBooksQuery, useDeleteProductMutation } =
-	bookManagementApi;
+export const {
+	useGetAllBooksQuery,
+	useDeleteProductMutation,
+	useAddBookMutation,
+} = bookManagementApi;
