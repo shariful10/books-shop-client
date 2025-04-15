@@ -8,9 +8,7 @@ const ProfileManagement = () => {
 	return (
 		<div className="flex justify-center items-center">
 			<div className="border-2 border-gray-300 rounded-xl flex-grow max-w-2xl p-5">
-				<h1 className="text-xl font-bold mb-5 text-center">
-					Your Profile Details
-				</h1>
+				<h1 className="text-xl font-bold mb-5 text-center">Profile Details</h1>
 
 				<div className="flex justify-center items-center mb-5">
 					<Avatar className="border-2 border-primary object-cover cursor-pointer size-48">

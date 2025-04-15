@@ -6,11 +6,11 @@ export type TBook = {
 	author: TUser;
 	price: number;
 	category: string;
-	description: string;
 	quantity: number;
 	inStock: boolean;
 	thumbnail: string;
 	createdAt?: string;
 	updatedAt?: string;
+	description: string;
 	__v?: number;
 };
