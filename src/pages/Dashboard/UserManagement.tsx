@@ -1,5 +1,6 @@
 import DeleteConfirmationModal from "@/components/module/modal/DeleteConfirmationModal";
 import BSTable from "@/components/module/table/BSTable";
+import TablePagination from "@/components/module/table/TablePagination";
 import Spinner from "@/components/spinner/Spinner";
 import {
 	useDeleteUserMutation,
@@ -12,13 +13,17 @@ import { useState } from "react";
 import { toast } from "sonner";
 
 const UserManagement = () => {
+	const [page, setPage] = useState<number>(1);
 	const [selectedId, setSelectedId] = useState<string | null>(null);
 	const [isModalOpen, setModalOpen] = useState<boolean>(false);
 
-	const { data: users, isFetching } = useGetAllUsersQuery(undefined);
+	const { data: users, isFetching } = useGetAllUsersQuery([
+		{ name: "limit", value: 6 },
+		{ name: "page", value: page },
+	]);
 	const [deleteUser, { isLoading }] = useDeleteUserMutation();
 
-	const user = users?.data.find((user: TUser) => user._id === selectedId);
+	const user = users?.data!.find((user: TUser) => user._id === selectedId);
 
 	const handleDelete = (userId: string) => {
 		setModalOpen(true);
@@ -39,7 +44,7 @@ const UserManagement = () => {
 				}
 			}
 		} catch (err: any) {
-			console.error(err?.message);
+			toast.error(err?.message);
 		}
 	};
 
@@ -99,7 +104,11 @@ const UserManagement = () => {
 				<h1 className="text-xl font-bold">Manage Users</h1>
 			</div>
 			<BSTable columns={columns} data={users?.data || []} />
-			{/* <TablePagination totalPages={meta?.totalPage} /> */}
+			<TablePagination
+				page={page}
+				setPage={setPage}
+				totalPage={users?.meta?.totalPage as number}
+			/>
 			<DeleteConfirmationModal
 				name={user?.name}
 				itemName="User"

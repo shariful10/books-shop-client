@@ -10,7 +10,7 @@ import {
 
 type TDeleteModalProps = {
 	itemName: string;
-	name: string | null;
+	name: string | undefined;
 	isOpen: boolean;
 	isLoading?: boolean;
 	onConfirm: () => void;

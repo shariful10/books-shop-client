@@ -1,5 +1,6 @@
 import DeleteConfirmationModal from "@/components/module/modal/DeleteConfirmationModal";
 import BSTable from "@/components/module/table/BSTable";
+import TablePagination from "@/components/module/table/TablePagination";
 import Spinner from "@/components/spinner/Spinner";
 import { Button } from "@/components/ui/button";
 import { currencyFormatter } from "@/lib/currencyFormatter";
@@ -8,7 +9,6 @@ import {
 	useDeleteProductMutation,
 	useGetAllBooksQuery,
 } from "@/redux/features/bookManagement/bookManagement";
-import { TUser } from "@/types";
 import { TBook } from "@/types/book";
 import { ColumnDef } from "@tanstack/react-table";
 import { Plus, Trash } from "lucide-react";
@@ -17,13 +17,20 @@ import { Link } from "react-router-dom";
 import { toast } from "sonner";
 
 const ProductManagement = () => {
+	const [page, setPage] = useState<number>(1);
+	// const [params, setParams] = useState<TQueryParam[]>([]);
 	const [selectedId, setSelectedId] = useState<string | null>(null);
 	const [isModalOpen, setModalOpen] = useState<boolean>(false);
 
-	const { data: books, isFetching } = useGetAllBooksQuery(undefined);
+	const { data: books, isFetching } = useGetAllBooksQuery([
+		{ name: "limit", value: 6 },
+		{ name: "page", value: page },
+		// ...params,
+	]);
+
 	const [deleteProduct, { isLoading }] = useDeleteProductMutation();
 
-	const book = books?.data.find((user: TUser) => user._id === selectedId);
+	const book = books?.data!.find((book: TBook) => book._id === selectedId);
 
 	const handleDelete = (userId: string) => {
 		setModalOpen(true);
@@ -31,7 +38,6 @@ const ProductManagement = () => {
 	};
 
 	const handleDeleteConfirm = async () => {
-		console.log(selectedId);
 		try {
 			if (selectedId) {
 				const res = await deleteProduct(selectedId).unwrap();
@@ -43,7 +49,7 @@ const ProductManagement = () => {
 				}
 			}
 		} catch (err: any) {
-			console.error(err?.message);
+			toast.error(err?.message);
 		}
 	};
 
@@ -135,7 +141,11 @@ const ProductManagement = () => {
 				</Link>
 			</div>
 			<BSTable columns={columns} data={books?.data || []} />
-			{/* <TablePagination totalPages={meta?.totalPage} /> */}
+			<TablePagination
+				page={page}
+				setPage={setPage}
+				totalPage={books?.meta?.totalPage as number}
+			/>
 			<DeleteConfirmationModal
 				name={book?.title}
 				itemName="Product"
