@@ -11,16 +11,18 @@ import {
 } from "@/redux/features/bookManagement/bookManagement";
 import { TBook } from "@/types/book";
 import { ColumnDef } from "@tanstack/react-table";
-import { Plus, Trash } from "lucide-react";
+import { Pencil, Plus, Trash } from "lucide-react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { toast } from "sonner";
+import UpdateProduct from "./UpdateProduct";
 
 const ProductManagement = () => {
 	const [page, setPage] = useState<number>(1);
 	// const [params, setParams] = useState<TQueryParam[]>([]);
 	const [selectedId, setSelectedId] = useState<string | null>(null);
 	const [isModalOpen, setModalOpen] = useState<boolean>(false);
+	const [isUpdateModalOpen, setUpdateModalOpen] = useState<boolean>(false);
 
 	const { data: books, isFetching } = useGetAllBooksQuery([
 		{ name: "limit", value: 6 },
@@ -32,9 +34,14 @@ const ProductManagement = () => {
 
 	const book = books?.data!.find((book: TBook) => book._id === selectedId);
 
-	const handleDelete = (userId: string) => {
+	const handleUpdate = (productId: string) => {
+		setUpdateModalOpen(true);
+		setSelectedId(productId);
+	};
+
+	const handleDelete = (productId: string) => {
 		setModalOpen(true);
-		setSelectedId(userId);
+		setSelectedId(productId);
 	};
 
 	const handleDeleteConfirm = async () => {
@@ -118,6 +125,13 @@ const ProductManagement = () => {
 			cell: ({ row }) => (
 				<div className="flex items-center space-x-3">
 					<button
+						className="text-gray-500 hover:text-primary cursor-pointer"
+						title="Delete"
+						onClick={() => handleUpdate(row.original._id)}
+					>
+						<Pencil className="w-5 h-5" />
+					</button>
+					<button
 						className="text-gray-500 hover:text-red-500 cursor-pointer"
 						title="Delete"
 						onClick={() => handleDelete(row.original._id)}
@@ -145,6 +159,11 @@ const ProductManagement = () => {
 				page={page}
 				setPage={setPage}
 				totalPage={books?.meta?.totalPage as number}
+			/>
+			<UpdateProduct
+				productId={selectedId}
+				isOpen={isUpdateModalOpen}
+				onOpenChange={setUpdateModalOpen}
 			/>
 			<DeleteConfirmationModal
 				name={book?.title}

@@ -43,11 +43,20 @@ const bookManagementApi = baseApi.injectEndpoints({
 			}),
 			invalidatesTags: ["Books"],
 		}),
+		updateProduct: builder.mutation({
+			query: (args) => ({
+				url: `/books/${args.productId}`,
+				method: "PUT",
+				body: args.data,
+			}),
+			invalidatesTags: ["Books"],
+		}),
 	}),
 });
 
 export const {
+	useAddBookMutation,
 	useGetAllBooksQuery,
 	useDeleteProductMutation,
-	useAddBookMutation,
+	useUpdateProductMutation,
 } = bookManagementApi;
