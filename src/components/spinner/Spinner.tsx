@@ -1,16 +1,24 @@
+import { cn } from "@/lib/utils";
 import "./spinner.css";
 
-const Spinner = () => {
+type TSpinnerProps = {
+	height?: string;
+	className?: string;
+};
+
+const Spinner = ({ height, className }: TSpinnerProps) => {
 	return (
-		<div className="h-screen w-full flex justify-center items-center">
-			<div className="spinner">
-				<div />
-				<div />
-				<div />
-				<div />
-				<div />
-				<div />
-			</div>
+		<div
+			className={`flex flex-col justify-center items-center ${
+				height ? height : "h-screen"
+			}`}
+		>
+			<div
+				className={cn(
+					"inline-block size-10 animate-spin rounded-full border-4 border-solid border-gray-300 border-t-primary",
+					className
+				)}
+			/>
 		</div>
 	);
 };

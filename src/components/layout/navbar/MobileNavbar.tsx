@@ -10,6 +10,7 @@ import { selectCurrentUser } from "@/redux/features/auth/authSlice";
 import { useAppSelector } from "@/redux/hook";
 import { Menu } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
+import Logo from "./Logo";
 
 const MobileNavbar = () => {
 	const navigate = useNavigate();
@@ -24,9 +25,11 @@ const MobileNavbar = () => {
 			</SheetTrigger>
 			<SheetContent>
 				<SheetHeader>
-					<SheetTitle className="text-start">Logo</SheetTitle>
+					<SheetTitle className="text-start">
+						<Logo className="w-[130px]" />
+					</SheetTitle>
 				</SheetHeader>
-				<div className="grid gap-4 py-4">
+				<div className="grid gap-4 pb-4">
 					<div className="flex flex-col justify-center gap-4 pl-4">
 						<Link to="/">Home</Link>
 						<Link to="/about">About</Link>
