@@ -7,7 +7,7 @@ const CategorySection = () => {
 	return (
 		<Container>
 			<SectionTitle title="Our Categories" />
-			<div className="grid grid-cols-2 md:grid-cols-5 gap-4 text-center mb-10">
+			<div className="grid grid-cols-2 md:grid-cols-5 gap-4 text-center">
 				{categoriesData.map(({ id, title, image }: TCategory) => (
 					<div key={id} className="border-2 pb-2 pt-3 rounded-md">
 						<img src={image} alt={title} />

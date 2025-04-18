@@ -2,12 +2,6 @@ import { Package, SquareTerminal, User, Users } from "lucide-react";
 
 export const adminData = {
 	navMain: [
-		// {
-		// 	title: "Dashboard",
-		// 	url: "/admin/dashboard",
-		// 	icon: SquareTerminal,
-		// 	isActive: true,
-		// },
 		{
 			title: "Profile Management",
 			url: "/admin/dashboard/profile-management",
@@ -39,24 +33,12 @@ export const adminData = {
 			icon: SquareTerminal,
 			items: [
 				{
-					title: "Product Management",
+					title: "Order Management",
 					url: "/admin/dashboard/order-management",
 				},
 			],
 		},
 	],
-	// navSecondary: [
-	// 	{
-	// 		title: "Support",
-	// 		url: "#",
-	// 		icon: LifeBuoy,
-	// 	},
-	// 	{
-	// 		title: "Feedback",
-	// 		url: "#",
-	// 		icon: Send,
-	// 	},
-	// ],
 };
 
 export const userData = {
@@ -66,28 +48,10 @@ export const userData = {
 			url: "/user/dashboard/profile-management",
 			icon: User,
 		},
-		// {
-		// 	title: "Shop",
-		// 	url: "#",
-		// 	icon: Bot,
-		// 	items: [
-		// 		{
-		// 			title: "Manage Products",
-		// 			url: "/user/shop/products",
-		// 		},
-		// 	],
-		// },
+		{
+			title: "Order Management",
+			url: "/user/dashboard/order-management",
+			icon: SquareTerminal,
+		},
 	],
-	// navSecondary: [
-	// 	{
-	// 		title: "Support",
-	// 		url: "#",
-	// 		icon: LifeBuoy,
-	// 	},
-	// 	{
-	// 		title: "Feedback",
-	// 		url: "#",
-	// 		icon: Send,
-	// 	},
-	// ],
 };

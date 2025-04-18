@@ -1,6 +1,6 @@
 export const adminPaths = [
 	{
-		title: "Profile",
+		title: "Profile Management",
 		url: "admin/dashboard/profile-management",
 	},
 	{
@@ -19,7 +19,11 @@ export const adminPaths = [
 
 export const userPaths = [
 	{
-		title: "Profile",
+		title: "Profile Management",
 		url: "user/dashboard/profile-management",
+	},
+	{
+		title: "Order Management",
+		url: "user/dashboard/order-management",
 	},
 ];

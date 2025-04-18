@@ -17,8 +17,8 @@ const TopBanner = () => {
 					</h1>
 					<div className="mt-8">
 						<Button
-							onClick={() => navigate("/all-products")}
-							className="text-base md:text-xl bg-[#f07c29] hover:bg-[#222222] border border-[#f07c29] hover:border-[#222222] rounded-md px-6 py-5 md:py-6"
+							onClick={() => navigate("/products")}
+							className="text-base md:text-xl bg-[#f07c29] hover:bg-[#222222] border border-[#f07c29] hover:border-[#222222] rounded-md px-6 py-5 md:py-6 cursor-pointer"
 						>
 							Shop Now
 						</Button>
