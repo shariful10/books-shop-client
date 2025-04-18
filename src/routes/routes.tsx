@@ -58,11 +58,6 @@ const router = createBrowserRouter([
 			{
 				path: "profile-management",
 				element: <ProfileManagement />,
-				// },
-				// {
-				// 	path: "product-management",
-				// 	element: <ProductManagement />,
-				// },
 				// {
 				// 	path: "order-management",
 				// 	element: <OrderManagement />,
