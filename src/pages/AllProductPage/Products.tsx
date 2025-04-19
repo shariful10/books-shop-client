@@ -1,5 +1,6 @@
 import Container from "@/components/module/Container";
 import ProductCard from "@/components/module/homePage/ProductCard";
+import SectionTop from "@/components/SectionTop";
 import Spinner from "@/components/spinner/Spinner";
 import { Input } from "@/components/ui/input";
 import { Slider } from "@/components/ui/slider";
@@ -17,15 +18,13 @@ const Products = () => {
 
 	return (
 		<Container>
-			<div className="flex justify-center items-center text-white bg-primary h-[300px] rounded-2xl my-10">
-				<h1 className="text-2xl font-bold">All Products</h1>
-			</div>
+			<SectionTop pageTitle="All Products" />
 			<div className="flex justify-between items-center">
 				<div className="mb-6">
 					<h2 className="text-lg font-semibold mb-4">Filter by price</h2>
-					<div className="md:flex items-center justify-between text-sm mb-2">
-						<span>{0}</span>
-						<span>{5000}</span>
+					<div className="md:flex items-center justify-between text-sm">
+						<span>BDT {0}</span>
+						<span>BDT {5000}</span>
 					</div>
 					<Slider
 						max={5000}
@@ -33,9 +32,9 @@ const Products = () => {
 						onValueChange={(value) => {
 							setPrice(value[0]);
 						}}
-						className="md:w-[200px]"
+						className="md:w-[200px] my-3"
 					/>
-					<p className="text-sm mt-2">Selected Price: {price}</p>
+					<p className="text-sm">Selected Price: BDT {price}</p>
 				</div>
 				<Input
 					type="search"

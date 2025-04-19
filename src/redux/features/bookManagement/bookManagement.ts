@@ -1,6 +1,6 @@
 import { baseApi } from "@/redux/api/baseApi";
 import { TQueryParam, TResponseRedux } from "@/types";
-import { TBook } from "@/types/book";
+import { TCartProduct } from "../cart/cartSlice";
 
 const bookManagementApi = baseApi.injectEndpoints({
 	endpoints: (builder) => ({
@@ -20,13 +20,27 @@ const bookManagementApi = baseApi.injectEndpoints({
 					params: params,
 				};
 			},
-			transformResponse: (response: TResponseRedux<TBook[]>) => {
+			transformResponse: (response: TResponseRedux<TCartProduct[]>) => {
 				return {
 					data: response.data,
 					meta: response.meta,
 				};
 			},
 			providesTags: ["Books"],
+		}),
+		getSingleBook: builder.query({
+			query: (productId) => {
+				return {
+					url: `/books/${productId}`,
+					method: "GET",
+				};
+			},
+			transformResponse: (response: TResponseRedux<TCartProduct>) => {
+				return {
+					data: response.data,
+					meta: response.meta,
+				};
+			},
 		}),
 		deleteProduct: builder.mutation({
 			query: (productId) => ({
@@ -57,6 +71,7 @@ const bookManagementApi = baseApi.injectEndpoints({
 export const {
 	useAddBookMutation,
 	useGetAllBooksQuery,
+	useGetSingleBookQuery,
 	useDeleteProductMutation,
 	useUpdateProductMutation,
 } = bookManagementApi;

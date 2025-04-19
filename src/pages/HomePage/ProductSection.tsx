@@ -4,7 +4,7 @@ import SectionTitle from "@/components/module/homePage/SectionTitle";
 import Spinner from "@/components/spinner/Spinner";
 import { Button } from "@/components/ui/button";
 import { useGetAllBooksQuery } from "@/redux/features/bookManagement/bookManagement";
-import { TBook } from "@/types/book";
+import { TCartProduct } from "@/redux/features/cart/cartSlice";
 import { Link } from "react-router-dom";
 
 const ProductSection = () => {
@@ -18,7 +18,7 @@ const ProductSection = () => {
 		<Container>
 			<SectionTitle title="Feature Products" />
 			<div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-				{products?.data?.slice(0, 6).map((product: TBook) => (
+				{products?.data?.slice(0, 6).map((product: TCartProduct) => (
 					<ProductCard key={product?._id} product={product} />
 				))}
 			</div>

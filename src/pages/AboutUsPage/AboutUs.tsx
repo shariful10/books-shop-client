@@ -1,8 +1,10 @@
 import Container from "@/components/module/Container";
+import SectionTop from "@/components/SectionTop";
 
 const AboutUs = () => {
 	return (
 		<Container>
+			<SectionTop pageTitle="About Us" />
 			<h2 className="text-3xl font-semibold mt-4">About Koparion</h2>
 			<p className="text-gray-600 my-4">
 				Welcome to Koparion, your go-to destination for books that inspire,
