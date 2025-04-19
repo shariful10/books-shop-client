@@ -17,7 +17,6 @@ import {
 type TDataTableProps<TData, TValue> = {
 	columns: ColumnDef<TData, TValue>[];
 	data: TData[];
-	isFetching?: boolean;
 };
 
 const BSTable = <TData, TValue>({

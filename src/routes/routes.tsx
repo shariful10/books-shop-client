@@ -11,6 +11,7 @@ import ProfileManagement from "@/pages/Dashboard/ProfileManagement";
 import UserOrderManagement from "@/pages/Dashboard/User/UserOrderManagement";
 import Home from "@/pages/HomePage/Home";
 import Login from "@/pages/LoginPage/Login";
+import ProductDetails from "@/pages/ProductDetails/ProductDetails";
 import Register from "@/pages/RegisterPage/Register";
 import { createBrowserRouter } from "react-router-dom";
 import AdminProtectedRoute from "./AdminProtectedRoute";
@@ -28,6 +29,10 @@ const router = createBrowserRouter([
 			{
 				path: "/products",
 				element: <Products />,
+			},
+			{
+				path: "/products/:productId",
+				element: <ProductDetails />,
 			},
 			{
 				path: "/cart",
