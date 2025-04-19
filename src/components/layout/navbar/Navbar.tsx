@@ -1,10 +1,9 @@
 import Container from "@/components/module/Container";
 import { Button } from "@/components/ui/button";
 import { selectCurrentUser } from "@/redux/features/auth/authSlice";
-import { orderedProductsSelector } from "@/redux/features/cart/cartSlice";
 import { useAppSelector } from "@/redux/hook";
-import { ShoppingCart } from "lucide-react";
 import { NavLink, useNavigate } from "react-router-dom";
+import Cart from "../Cart";
 import Dropdown from "./Dropdown";
 import Logo from "./Logo";
 import MobileNavbar from "./MobileNavbar";
@@ -13,7 +12,6 @@ const Navbar = () => {
 	const navigate = useNavigate();
 
 	const user = useAppSelector(selectCurrentUser);
-	const product = useAppSelector(orderedProductsSelector);
 
 	return (
 		<div className="w-full border-b-2 border-b-primary sticky top-0 z-50 bg-background">
@@ -48,17 +46,8 @@ const Navbar = () => {
 				<div className="flex items-center space-x-4">
 					{user ? (
 						<div className="flex items-center space-x-4">
-							{user && (
-								<div className="flex items-center space-x-4">
-									<div className="relative">
-										<ShoppingCart className="mt-1" />
-										<span className="absolute -top-1 -right-2 bg-primary text-white rounded-full w-5 h-5 flex items-center justify-center text-sm font-semibold">
-											{product?.length}
-										</span>
-									</div>
-									<Dropdown />
-								</div>
-							)}
+							<Cart />
+							<Dropdown />
 						</div>
 					) : (
 						<div className="space-x-4 hidden md:block">

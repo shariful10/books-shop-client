@@ -9,20 +9,7 @@ import { useParams } from "react-router-dom";
 const ProductDetails = () => {
 	const params = useParams();
 	const { productId } = params;
-	// const dispatch = useAppDispatch();
 	const { data: product, isFetching } = useGetSingleBookQuery(productId);
-
-	// const handleIncrementQuantity = (id: string) => {
-	// 	dispatch(incrementOrderQuantity(id));
-	// };
-
-	// const handleDecrementQuantity = (id: string) => {
-	// 	dispatch(decrementOrderQuantity(id));
-	// };
-
-	// const handleRemoveProduct = (id: string) => {
-	// 	dispatch(removeProduct(id));
-	// };
 
 	if (isFetching) {
 		return <Spinner />;

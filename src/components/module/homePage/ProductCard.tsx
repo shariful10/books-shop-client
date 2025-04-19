@@ -4,6 +4,7 @@ import { addProduct, TCartProduct } from "@/redux/features/cart/cartSlice";
 import { useAppDispatch } from "@/redux/hook";
 import { TBook } from "@/types";
 import { Link } from "react-router-dom";
+import { toast } from "sonner";
 
 type TProductCardProps = {
 	product: TCartProduct;
@@ -13,7 +14,12 @@ const ProductCard = ({ product }: TProductCardProps) => {
 	const dispatch = useAppDispatch();
 
 	const handleAddProduct = (product: TBook) => {
-		dispatch(addProduct(product));
+		try {
+			dispatch(addProduct(product));
+			toast.success("Product added to cart successfully!");
+		} catch (err: any) {
+			toast.error(err?.message);
+		}
 	};
 
 	return (
