@@ -4,6 +4,7 @@ import SectionTop from "@/components/SectionTop";
 import { Button } from "@/components/ui/button";
 import { currencyFormatter } from "@/lib/currencyFormatter";
 import {
+	clearCart,
 	decrementOrderQuantity,
 	incrementOrderQuantity,
 	orderedProductsSelector,
@@ -14,8 +15,6 @@ import {
 } from "@/redux/features/cart/cartSlice";
 import { useCreateOrderMutation } from "@/redux/features/order/orderApi";
 import { useAppDispatch, useAppSelector } from "@/redux/hook";
-import { TResponse } from "@/types";
-import { TOrder } from "@/types/order";
 import { ColumnDef } from "@tanstack/react-table";
 import { Minus, Plus, Trash } from "lucide-react";
 import { toast } from "sonner";
@@ -26,7 +25,7 @@ const CheckoutPage = () => {
 	const order = useAppSelector(orderSelector);
 	const subTotal = useAppSelector(subTotalSelector);
 	const products = useAppSelector(orderedProductsSelector);
-	const [createOrder] = useCreateOrderMutation();
+	const [createOrder, { isLoading }] = useCreateOrderMutation();
 
 	const handleIncrementQuantity = (id: string) => {
 		dispatch(incrementOrderQuantity(id));
@@ -41,27 +40,27 @@ const CheckoutPage = () => {
 	};
 
 	const handleOrder = async () => {
-		// const orderLoading = toast.loading("Order is being placed");
+		const orderLoading = toast.loading("Order is being placed");
 
 		try {
 			if (products.length === 0) {
 				throw new Error("Cart is empty, what are you trying to order ??");
 			}
 
-			const res = (await createOrder(order)) as TResponse<TOrder>;
+			const res = await createOrder(order);
 			console.log(res);
 
-			// if (res.success) {
-			// 	toast.success(res.message, { id: orderLoading });
-			// 	dispatch(clearCart());
-			// 	navigate(res?.data?.paymentUrl || "/");
-			// }
+			if (res?.data!.success) {
+				toast.success(res?.data!.message, { id: orderLoading });
+				dispatch(clearCart());
+				// navigate(res?.data?.paymentUrl || "/");
+			}
 
-			// if (!res.success) {
-			// 	toast.error(res.message, { id: orderLoading });
-			// }
-		} catch (error: any) {
-			toast.error(error.message); //{ id: orderLoading }
+			if (!res?.data!.success) {
+				toast.error(res?.data!.message, { id: orderLoading });
+			}
+		} catch (err: any) {
+			toast.error(err.message, { id: orderLoading });
 		}
 	};
 
@@ -180,9 +179,10 @@ const CheckoutPage = () => {
 						</div>
 						<Button
 							onClick={handleOrder}
+							disabled={isLoading}
 							className="w-full text-xl font-semibold py-5 cursor-pointer"
 						>
-							Order Now
+							{isLoading ? "Placing Order..." : "Place Order"}
 						</Button>
 					</div>
 				</div>

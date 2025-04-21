@@ -12,6 +12,7 @@ const Navbar = () => {
 	const navigate = useNavigate();
 
 	const user = useAppSelector(selectCurrentUser);
+	console.log(user);
 
 	return (
 		<div className="w-full border-b-2 border-b-primary sticky top-0 z-50 bg-background">
