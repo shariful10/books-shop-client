@@ -4,6 +4,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 export interface TCartProduct extends TBook {
 	orderQuantity: number;
+	totalPrice: number;
 }
 
 type TInitialState = {
@@ -21,7 +22,6 @@ const cartSlice = createSlice({
 	initialState,
 	reducers: {
 		addProduct: (state, action) => {
-			console.log(action.payload, "action.payload");
 			if (state.products.length === 0) {
 				state.productId = action.payload._id;
 			}
@@ -62,6 +62,9 @@ const cartSlice = createSlice({
 				(product) => product._id !== action.payload
 			);
 		},
+		clearCart: (state) => {
+			state.products = [];
+		},
 	},
 });
 
@@ -69,10 +72,48 @@ export const orderedProductsSelector = (state: RootState) => {
 	return state.cart.products;
 };
 
+// export const orderSelector = (state: RootState) => {
+// 	return {
+// 		products: state.cart.products.map((product) => ({
+// 			product: product._id,
+// 			quantity: product.orderQuantity,
+// 		})),
+// 		paymentMethod: "Online",
+// 	};
+// };
+
+export const orderSelector = (state: RootState) => {
+	const user = state.cart.products[0]?.author._id || "";
+
+	const products = state.cart.products.map((product) => ({
+		product: product._id,
+		quantity: product.orderQuantity,
+		totalPrice: product.price * product.orderQuantity,
+	}));
+
+	const totalAmount = state.cart.products.reduce((total, product) => {
+		return total + product.price * product.orderQuantity;
+	}, 0);
+
+	return {
+		user,
+		products,
+		totalAmount,
+		paymentMethod: "Online",
+	};
+};
+
+export const subTotalSelector = (state: RootState) => {
+	return state.cart.products.reduce((acc, product) => {
+		return acc + product.price * product.orderQuantity;
+	}, 0);
+};
+
 export const {
 	addProduct,
 	incrementOrderQuantity,
 	decrementOrderQuantity,
 	removeProduct,
+	clearCart,
 } = cartSlice.actions;
 export default cartSlice.reducer;

@@ -113,13 +113,21 @@ const Cart = () => {
 						)}
 					</div>
 				</div>
-				<SheetClose asChild>
-					<Link to="/checkout" className="mx-5">
-						<Button className="cursor-pointer w-full">
-							Process to Checkout
-						</Button>
-					</Link>
-				</SheetClose>
+				{product?.length > 0 ? (
+					<SheetClose asChild>
+						<Link to="/checkout" className="mx-5">
+							<Button className="cursor-pointer w-full">
+								Process to Checkout
+							</Button>
+						</Link>
+					</SheetClose>
+				) : (
+					<SheetClose asChild>
+						<Link to="/products" className="mx-5">
+							<Button className="cursor-pointer w-full">Shop Now</Button>
+						</Link>
+					</SheetClose>
+				)}
 			</SheetContent>
 		</Sheet>
 	);

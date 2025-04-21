@@ -33,20 +33,29 @@ const ProductCard = ({ product }: TProductCardProps) => {
 					</div>
 					<p className="font-semibold">{currencyFormatter(product?.price)}</p>
 				</div>
-				<div className="grid md:grid-cols-3 gap-4">
-					<Button className="cursor-pointer">Buy Now</Button>
-					<Button
-						disabled={!product?.inStock}
-						className="cursor-pointer"
-						onClick={() => handleAddProduct(product)}
-					>
-						Add to cart
-					</Button>
+				<div className="grid md:grid-cols-2 gap-4">
+					{/* <Button className="cursor-pointer">Buy Now</Button> */}
+					{product?.inStock ? (
+						<Button
+							className="cursor-pointer"
+							onClick={() => handleAddProduct(product)}
+						>
+							Add to cart
+						</Button>
+					) : (
+						<Button
+							disabled
+							className="cursor-not-allowed bg-red-400"
+							onClick={() => handleAddProduct(product)}
+						>
+							Add to cart
+						</Button>
+					)}
 					<Link
 						to={`/products/${product?._id}`}
-						className="flex justify-center items-center"
+						className="flex justify-center items-center w-full"
 					>
-						<Button className="cursor-pointer">View Details</Button>
+						<Button className="cursor-pointer w-full">View Details</Button>
 					</Link>
 				</div>
 			</div>

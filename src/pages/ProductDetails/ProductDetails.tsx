@@ -4,12 +4,26 @@ import Spinner from "@/components/spinner/Spinner";
 import { Button } from "@/components/ui/button";
 import { currencyFormatter } from "@/lib/currencyFormatter";
 import { useGetSingleBookQuery } from "@/redux/features/bookManagement/bookManagement";
+import { addProduct } from "@/redux/features/cart/cartSlice";
+import { useAppDispatch } from "@/redux/hook";
+import { TBook } from "@/types";
 import { useParams } from "react-router-dom";
+import { toast } from "sonner";
 
 const ProductDetails = () => {
 	const params = useParams();
 	const { productId } = params;
+	const dispatch = useAppDispatch();
 	const { data: product, isFetching } = useGetSingleBookQuery(productId);
+
+	const handleAddProduct = (product: TBook) => {
+		try {
+			dispatch(addProduct(product));
+			toast.success("Product added to cart successfully!");
+		} catch (err: any) {
+			toast.error(err?.message);
+		}
+	};
 
 	if (isFetching) {
 		return <Spinner />;
@@ -76,9 +90,23 @@ const ProductDetails = () => {
 						<Button className="cursor-pointer mt-5">Buy Now</Button>
 						<Button className="cursor-pointer mt-5">Add to cart</Button>
 					</div> */}
-					<div className="grid grid-cols-2 gap-4">
-						<Button className="cursor-pointer mt-5">Buy Now</Button>
-						<Button className="cursor-pointer mt-5">Add to cart</Button>
+					<div className="mt-5">
+						{product?.data?.inStock ? (
+							<Button
+								className="cursor-pointer"
+								onClick={() => handleAddProduct(product)}
+							>
+								Add to cart
+							</Button>
+						) : (
+							<Button
+								disabled
+								className="cursor-not-allowed bg-red-400"
+								onClick={() => handleAddProduct(product)}
+							>
+								Add to cart
+							</Button>
+						)}
 					</div>
 				</div>
 			</div>

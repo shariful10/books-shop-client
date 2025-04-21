@@ -5,7 +5,7 @@ import Spinner from "@/components/spinner/Spinner";
 import { Input } from "@/components/ui/input";
 import { Slider } from "@/components/ui/slider";
 import { useGetAllBooksQuery } from "@/redux/features/bookManagement/bookManagement";
-import { TBook } from "@/types";
+import { TCartProduct } from "@/redux/features/cart/cartSlice";
 import { useState } from "react";
 
 const Products = () => {
@@ -44,7 +44,7 @@ const Products = () => {
 				/>
 			</div>
 			<div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
-				{products?.data?.map((product: TBook) => (
+				{products?.data?.map((product: TCartProduct) => (
 					<ProductCard key={product?._id} product={product} />
 				))}
 			</div>

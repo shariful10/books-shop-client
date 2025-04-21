@@ -35,12 +35,6 @@ const bookManagementApi = baseApi.injectEndpoints({
 					method: "GET",
 				};
 			},
-			transformResponse: (response: TResponseRedux<TCartProduct>) => {
-				return {
-					data: response.data,
-					meta: response.meta,
-				};
-			},
 		}),
 		deleteProduct: builder.mutation({
 			query: (productId) => ({

@@ -21,6 +21,7 @@ const UserManagement = () => {
 		{ name: "limit", value: 6 },
 		{ name: "page", value: page },
 	]);
+
 	const [deleteUser, { isLoading }] = useDeleteUserMutation();
 
 	const user = users?.data!.find((user: TUser) => user._id === selectedId);

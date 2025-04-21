@@ -2,7 +2,7 @@ import App from "@/App";
 import Dashboard from "@/components/layout/dashboard/Dashboard";
 import AboutUs from "@/pages/AboutUsPage/AboutUs";
 import Products from "@/pages/AllProductPage/Products";
-import Cart from "@/pages/CartPage/Cart";
+import CheckoutPage from "@/pages/CheckoutPage/CheckoutPage";
 import AddProduct from "@/pages/Dashboard/Admin/AddProduct";
 import OrderManagement from "@/pages/Dashboard/Admin/OrderManagement";
 import ProductManagement from "@/pages/Dashboard/Admin/ProductManagement/ProductManagement";
@@ -35,12 +35,12 @@ const router = createBrowserRouter([
 				element: <ProductDetails />,
 			},
 			{
-				path: "/cart",
-				element: <Cart />,
-			},
-			{
 				path: "/about",
 				element: <AboutUs />,
+			},
+			{
+				path: "/checkout",
+				element: <CheckoutPage />,
 			},
 		],
 	},
@@ -52,6 +52,7 @@ const router = createBrowserRouter([
 		path: "/register",
 		element: <Register />,
 	},
+
 	{
 		path: "/user/dashboard",
 		element: (
