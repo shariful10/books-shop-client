@@ -13,6 +13,7 @@ import Home from "@/pages/HomePage/Home";
 import Login from "@/pages/LoginPage/Login";
 import ProductDetails from "@/pages/ProductDetails/ProductDetails";
 import Register from "@/pages/RegisterPage/Register";
+import SuccessPage from "@/pages/SuccessPage/SuccessPage";
 import { createBrowserRouter } from "react-router-dom";
 import AdminProtectedRoute from "./AdminProtectedRoute";
 import UserProtectedRoute from "./UserProtectedRoute";
@@ -41,6 +42,10 @@ const router = createBrowserRouter([
 			{
 				path: "/checkout",
 				element: <CheckoutPage />,
+			},
+			{
+				path: "/success",
+				element: <SuccessPage />,
 			},
 		],
 	},

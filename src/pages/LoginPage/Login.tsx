@@ -36,7 +36,6 @@ const Login = () => {
 			const res = await login(data).unwrap();
 
 			const user = verifyToken(res?.data?.accessToken as string) as TLoggedUser;
-			console.log(user);
 
 			dispatch(
 				setUser({

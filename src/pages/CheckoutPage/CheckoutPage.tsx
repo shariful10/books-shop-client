@@ -20,7 +20,6 @@ import { Minus, Plus, Trash } from "lucide-react";
 import { toast } from "sonner";
 
 const CheckoutPage = () => {
-	// const navigate = useNavigate();
 	const dispatch = useAppDispatch();
 	const order = useAppSelector(orderSelector);
 	const subTotal = useAppSelector(subTotalSelector);
@@ -48,12 +47,12 @@ const CheckoutPage = () => {
 			}
 
 			const res = await createOrder(order);
-			console.log(res);
+			console.log(res?.data?.data);
 
 			if (res?.data!.success) {
 				toast.success(res?.data!.message, { id: orderLoading });
 				dispatch(clearCart());
-				// navigate(res?.data?.paymentUrl || "/");
+				window.location.href = res?.data?.data?.paymentUrl || "/";
 			}
 
 			if (!res?.data!.success) {
